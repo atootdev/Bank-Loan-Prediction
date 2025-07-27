@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS prediction;
+
+CREATE TABLE customer (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  age INTEGER NOT NULL,
+  experience INTEGER NOT NULL,
+  income INTEGER NOT NULL,
+  zip_code INTEGER NOT NULL,
+  family INTEGER NOT NULL,
+  cc_avg REAL NOT NULL,
+  education INTEGER NOT NULL,
+  mortgage INTEGER NOT NULL,
+  securities_account INTEGER NOT NULL,
+  cd_account INTEGER NOT NULL,
+  online INTEGER NOT NULL,
+  credit_card INTEGER NOT NULL
+);
+
+CREATE TABLE prediction (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  customer_id INTEGER NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  prediction TEXT NOT NULL,
+  FOREIGN KEY (customer_id) REFERENCES customer (id)
+);
