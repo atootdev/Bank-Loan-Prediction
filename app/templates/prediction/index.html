@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Predictions{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('prediction.create') }}">New Customer</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for prediction in predictions %}
+    <article class="prediction">
+      <header>
+        <div>
+          <h1>{{ prediction['id'] }}</h1>
+          <div class="about">customer {{ prediction['customer_id'] }} on {{ prediction['created'].strftime('%Y-%m-%d') }}</div>
+        </div>
+        {% if g.user['id'] %}
+          <a class="action" href="{{ url_for('prediction.update', id=prediction['id']) }}">Update</a>
+        {% endif %}
+      </header>
+      <p class="body">{{ prediction['prediction'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

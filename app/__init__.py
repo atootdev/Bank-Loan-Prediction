@@ -1,7 +1,5 @@
 import os
-import joblib
-import pandas as pd
-from flask import Flask, request, jsonify
+from flask import Flask
 from . import db
 
 def create_app(test_config=None):
@@ -31,5 +29,12 @@ def create_app(test_config=None):
   
   from . import auth
   app.register_blueprint(auth.bp)
+  
+  from . import prediction
+  app.register_blueprint(prediction.bp)
+  app.add_url_rule('/', endpoint='index')
+  
+  from . import customer
+  app.register_blueprint(customer.bp)
   
   return app
